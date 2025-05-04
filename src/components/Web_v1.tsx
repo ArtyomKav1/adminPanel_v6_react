@@ -43,9 +43,7 @@ function Web_v1() {
     const v1GetFetch = async () => {
         try {
             const response = await API.v1_get()
-            console.log(response.data.result
-
-            )
+            console.log(response.data.result)
             setData(response.data.result)
         } catch (error) { console.error('Ошибка при запросе v1GetFetch:', error); }
     }
@@ -54,7 +52,7 @@ function Web_v1() {
         setLoading(true)
         try {
             const response = await API.v1_delete(id)
-            setData(response.data)
+            setData(response.data.result)
         } catch (error) {
             console.error('Ошибка при запросе v1_delete:', error);
         } finally { setLoading(false) }
@@ -75,6 +73,7 @@ function Web_v1() {
 
                 <div className="py-[20px]">
                     <button className="bg-green-300 px-[30px] py-[10px] rounded-[8px] cursor-pointer" onClick={() => v1GetFetch()}>REFRESH</button>
+                    {loading && <div>Loading....</div>}
                 </div>
                 <div className="shrink-0">
                     {data?.map((item, index) => (
